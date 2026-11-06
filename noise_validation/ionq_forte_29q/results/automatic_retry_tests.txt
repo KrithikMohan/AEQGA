@@ -1,0 +1,18 @@
+test_post_and_authentication_errors_do_not_retry (test_ionq_transport_recovery.RecoveryTests.test_post_and_authentication_errors_do_not_retry) ... ok
+test_temporary_get_failure_recovers_same_job (test_ionq_transport_recovery.RecoveryTests.test_temporary_get_failure_recovers_same_job) ... ok
+{"timestamp_utc": "2026-11-05T12:31:26.198678+00:00", "status": "running", "attempt": 1, "supervisor_pid": 39516, "training_pid": 101}
+{"timestamp_utc": "2026-11-05T12:31:26.200682+00:00", "status": "retry_wait", "attempt": 1, "next_retry_seconds": 60, "reason": "Retrying the same study using saved requests, job IDs and histograms.", "exit_code": 1}
+{"timestamp_utc": "2026-11-05T12:31:26.219702+00:00", "status": "running", "attempt": 2, "supervisor_pid": 39516, "training_pid": 102}
+{"timestamp_utc": "2026-11-05T12:31:26.221701+00:00", "status": "complete", "attempt": 2}
+test_crash_restarts_same_output_and_finishes (test_ionq_supervisor.SupervisorTests.test_crash_restarts_same_output_and_finishes) ... ok
+{"timestamp_utc": "2026-11-05T12:31:26.226700+00:00", "status": "running", "attempt": 1, "supervisor_pid": 39516, "training_pid": 10}
+{"timestamp_utc": "2026-11-05T12:31:26.229211+00:00", "status": "retry_wait", "attempt": 1, "next_retry_seconds": 60, "reason": "Retrying the same study using saved requests, job IDs and histograms.", "exit_code": 1}
+{"timestamp_utc": "2026-11-05T12:31:26.232213+00:00", "status": "paused_by_user", "attempt": 1}
+test_pause_during_retry_does_not_restart (test_ionq_supervisor.SupervisorTests.test_pause_during_retry_does_not_restart) ... ok
+test_restart_backoff_is_capped (test_ionq_supervisor.SupervisorTests.test_restart_backoff_is_capped) ... ok
+test_uncertain_post_and_authentication_do_not_restart (test_ionq_supervisor.SupervisorTests.test_uncertain_post_and_authentication_do_not_restart) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.048s
+
+OK

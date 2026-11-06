@@ -1,0 +1,101 @@
+{
+  "config": {
+    "width": 7,
+    "mode": "ideal",
+    "generations": 100,
+    "shots": 100,
+    "seed": 7,
+    "qubit_budget": 29,
+    "provenance": {
+      "source_sha256": {
+        "aeqga.py": "c8245b97c1ca052eb46e1d62c5e014086747b4649863414d7b0ce4cff639c39e",
+        "aeqga_legacy.py": "41a8052f27a2e1c6d26b40cc3a875a57a26b681b1880b53aee417ad36f91b7da",
+        "aeqga_parallel.py": "184162e7e3ed90d1c1f79451ba0573041e0f89ce1558eaa45c6c37fa6d9ecfa2",
+        "aeqga_profiled_pantheon.py": "280c66b10d4c93db92bff99bb9b58826ea86a16387a929eeafcd46bd643b19b7",
+        "aeqga_ionq_cloud.py": "f4d8c98dc6db2ae4fa8d0ea85b7433ba600c7b4e3e0a7effd81517fe11dc41df",
+        "run_ionq_forte_study.py": "c0e4d5573267560d61582e8b019c20146375a0fbfc5da0e6f8f23dddfddf147c",
+        "run_pantheon_aeqga.py": "520a7b904764e3010297248bdeb291cb7f87973e6afaa872068124e4e08ac55f"
+      },
+      "data_sha256": {
+        "Pantheon+SH0ES.dat": "1cb0fc379ef066afdc2ffd1857681cc478024570d8a3eba284fb645775198cf8",
+        "Pantheon+SH0ES_STAT+SYS.cov": "abf806d966485e64afdb359c87bffc0ecc00d05eff0a31ced66f247385df0fdc"
+      },
+      "versions": {
+        "numpy": "2.0.1",
+        "scipy": "1.17.1",
+        "qiskit": "2.3.0",
+        "qiskit-aer": "0.17.2",
+        "requests": "2.32.5",
+        "pandas": "3.0.2",
+        "matplotlib": "3.10.8"
+      }
+    }
+  },
+  "width": 7,
+  "mode": "ideal",
+  "generations": 100,
+  "shots": 100,
+  "qubit_budget": 29,
+  "used_qubits": 28,
+  "discarded_qubits": 1,
+  "parallel_circuits": 4,
+  "population_per_circuit": 128,
+  "total_population": 512,
+  "elite_local_global_per_circuit": [
+    32,
+    32,
+    64
+  ],
+  "best_parameters": [
+    73.49555391126015,
+    0.33290773094369935,
+    -19.244792124689454
+  ],
+  "chi2": 1452.0204460687025,
+  "delta_chi2": 0.0044960885113596305,
+  "reference": {
+    "p": [
+      73.53278416089039,
+      0.33181205246809664,
+      -19.24405749106509
+    ],
+    "chi2": 1452.0159499801912,
+    "success": true,
+    "method": "GLS profile in M and -5log10(H0/70); golden-section Omega_m search"
+  },
+  "fitness_evaluations": 38912,
+  "candidate_rows": 51712,
+  "cloud_jobs": 0,
+  "training_wall_seconds": 58.23031579999997,
+  "max_independent_chi2_error": 5.661604518536478e-11,
+  "mean_metrics": {
+    "mean_counts_vs_ideal_tvd": 0.27382433355774966,
+    "mean_zero_fraction": 0.2641015625,
+    "mean_qis_cx_per_subpopulation": 485.91,
+    "max_synthesis_tvd": 7.053262759306679e-09
+  },
+  "thresholds": {
+    "0.1": {
+      "generation": 0,
+      "H0": 73.64040469894101,
+      "Omega_m": 0.32828207395331,
+      "M": -19.24205404719859,
+      "chi2": 1452.0607436360401,
+      "delta_chi2": 0.04479365584893458,
+      "fitness_evaluations": 512,
+      "wall_seconds": 0.5348275000001195
+    },
+    "0.01": {
+      "generation": 46,
+      "H0": 73.61864400863315,
+      "Omega_m": 0.33214625686316035,
+      "M": -19.241458643170404,
+      "chi2": 1452.0239950682712,
+      "delta_chi2": 0.008045088080052665,
+      "fitness_evaluations": 18176,
+      "wall_seconds": 27.52086220000001
+    },
+    "0.001": null
+  },
+  "validation": "passed"
+}

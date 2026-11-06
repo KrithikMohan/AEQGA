@@ -1,0 +1,17 @@
+test_budget_width_remainders_and_elites (test_ionq_forte.IonQTests.test_budget_width_remainders_and_elites) ... ok
+test_cache_avoids_resubmission_and_rejects_changes (test_ionq_forte.IonQTests.test_cache_avoids_resubmission_and_rejects_changes) ... ok
+Exact rotation tree: original TVD=4.1e-06, new TVD=5.13478149e-16
+Exact rotation tree: original TVD=4.1e-06, new TVD=1.11022302e-16
+Exact rotation tree: original TVD=4.1e-06, new TVD=4.57966998e-16
+Exact rotation tree: original TVD=4.1e-06, new TVD=6.45317133e-16
+Exact rotation tree: original TVD=4.1e-06, new TVD=1.03736464e-15
+Exact rotation tree: original TVD=4.1e-06, new TVD=1.45369827e-15
+test_exact_fallback_against_requested_state_and_genetic_gates (test_ionq_forte.IonQTests.test_exact_fallback_against_requested_state_and_genetic_gates) ... ok
+test_marginals_from_non_symmetric_packed_histogram (test_ionq_forte.IonQTests.test_marginals_from_non_symmetric_packed_histogram) ... ok
+test_profiled_training_and_full_candidate_records (test_ionq_forte.IonQTests.test_profiled_training_and_full_candidate_records) ... ok
+test_stage_conversion_and_pack_order (test_ionq_forte.IonQTests.test_stage_conversion_and_pack_order) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.198s
+
+OK

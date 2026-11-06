@@ -1,0 +1,110 @@
+{
+  "config": {
+    "width": 3,
+    "mode": "ideal",
+    "generations": 100,
+    "shots": 100,
+    "seed": 7,
+    "qubit_budget": 29,
+    "provenance": {
+      "source_sha256": {
+        "aeqga.py": "c8245b97c1ca052eb46e1d62c5e014086747b4649863414d7b0ce4cff639c39e",
+        "aeqga_legacy.py": "41a8052f27a2e1c6d26b40cc3a875a57a26b681b1880b53aee417ad36f91b7da",
+        "aeqga_parallel.py": "184162e7e3ed90d1c1f79451ba0573041e0f89ce1558eaa45c6c37fa6d9ecfa2",
+        "aeqga_profiled_pantheon.py": "280c66b10d4c93db92bff99bb9b58826ea86a16387a929eeafcd46bd643b19b7",
+        "aeqga_ionq_cloud.py": "f4d8c98dc6db2ae4fa8d0ea85b7433ba600c7b4e3e0a7effd81517fe11dc41df",
+        "run_ionq_forte_study.py": "c0e4d5573267560d61582e8b019c20146375a0fbfc5da0e6f8f23dddfddf147c",
+        "run_pantheon_aeqga.py": "520a7b904764e3010297248bdeb291cb7f87973e6afaa872068124e4e08ac55f"
+      },
+      "data_sha256": {
+        "Pantheon+SH0ES.dat": "1cb0fc379ef066afdc2ffd1857681cc478024570d8a3eba284fb645775198cf8",
+        "Pantheon+SH0ES_STAT+SYS.cov": "abf806d966485e64afdb359c87bffc0ecc00d05eff0a31ced66f247385df0fdc"
+      },
+      "versions": {
+        "numpy": "2.0.1",
+        "scipy": "1.17.1",
+        "qiskit": "2.3.0",
+        "qiskit-aer": "0.17.2",
+        "requests": "2.32.5",
+        "pandas": "3.0.2",
+        "matplotlib": "3.10.8"
+      }
+    }
+  },
+  "width": 3,
+  "mode": "ideal",
+  "generations": 100,
+  "shots": 100,
+  "qubit_budget": 29,
+  "used_qubits": 27,
+  "discarded_qubits": 2,
+  "parallel_circuits": 9,
+  "population_per_circuit": 8,
+  "total_population": 72,
+  "elite_local_global_per_circuit": [
+    2,
+    2,
+    4
+  ],
+  "best_parameters": [
+    73.53465321950995,
+    0.3317777171361086,
+    -19.244014079127357
+  ],
+  "chi2": 1452.0159561475757,
+  "delta_chi2": 6.167384526634123e-06,
+  "reference": {
+    "p": [
+      73.53278416089039,
+      0.33181205246809664,
+      -19.24405749106509
+    ],
+    "chi2": 1452.0159499801912,
+    "success": true,
+    "method": "GLS profile in M and -5log10(H0/70); golden-section Omega_m search"
+  },
+  "fitness_evaluations": 5472,
+  "candidate_rows": 7272,
+  "cloud_jobs": 0,
+  "training_wall_seconds": 19.12088390000008,
+  "max_independent_chi2_error": 6.230038707144558e-11,
+  "mean_metrics": {
+    "mean_counts_vs_ideal_tvd": 0.06632245174531892,
+    "mean_zero_fraction": 0.01402777777777778,
+    "mean_qis_cx_per_subpopulation": 22.026666666666664,
+    "max_synthesis_tvd": 3.487281679585515e-14
+  },
+  "thresholds": {
+    "0.1": {
+      "generation": 0,
+      "H0": 73.64040469894101,
+      "Omega_m": 0.32828207395331,
+      "M": -19.24205404719859,
+      "chi2": 1452.0607436360401,
+      "delta_chi2": 0.04479365584893458,
+      "fitness_evaluations": 72,
+      "wall_seconds": 0.14671529999986888
+    },
+    "0.01": {
+      "generation": 5,
+      "H0": 73.58502440276685,
+      "Omega_m": 0.3328962951990907,
+      "M": -19.242196761031114,
+      "chi2": 1452.0231794238703,
+      "delta_chi2": 0.00722944367907985,
+      "fitness_evaluations": 342,
+      "wall_seconds": 1.139817199999925
+    },
+    "0.001": {
+      "generation": 12,
+      "H0": 73.55468419726148,
+      "Omega_m": 0.3316957730853033,
+      "M": -19.243458225694663,
+      "chi2": 1452.0164259454295,
+      "delta_chi2": 0.0004759652383654611,
+      "fitness_evaluations": 720,
+      "wall_seconds": 2.457056499999908
+    }
+  },
+  "validation": "passed"
+}

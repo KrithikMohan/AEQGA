@@ -1,0 +1,93 @@
+{
+  "widths": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "modes": [
+    "noisy",
+    "ideal"
+  ],
+  "generations": 100,
+  "shots": 100,
+  "seed": 7,
+  "requested_qubit_budget": 29,
+  "model": "official IonQ Cloud forte-1",
+  "backend": "simulator",
+  "reference": {
+    "p": [
+      73.53278416089039,
+      0.33181205246809664,
+      -19.24405749106509
+    ],
+    "chi2": 1452.0159499801912,
+    "success": true,
+    "method": "GLS profile in M and -5log10(H0/70); golden-section Omega_m search"
+  },
+  "provenance": {
+    "source_sha256": {
+      "aeqga.py": "c8245b97c1ca052eb46e1d62c5e014086747b4649863414d7b0ce4cff639c39e",
+      "aeqga_legacy.py": "41a8052f27a2e1c6d26b40cc3a875a57a26b681b1880b53aee417ad36f91b7da",
+      "aeqga_parallel.py": "184162e7e3ed90d1c1f79451ba0573041e0f89ce1558eaa45c6c37fa6d9ecfa2",
+      "aeqga_profiled_pantheon.py": "280c66b10d4c93db92bff99bb9b58826ea86a16387a929eeafcd46bd643b19b7",
+      "aeqga_ionq_cloud.py": "f4d8c98dc6db2ae4fa8d0ea85b7433ba600c7b4e3e0a7effd81517fe11dc41df",
+      "run_ionq_forte_study.py": "c0e4d5573267560d61582e8b019c20146375a0fbfc5da0e6f8f23dddfddf147c",
+      "run_pantheon_aeqga.py": "520a7b904764e3010297248bdeb291cb7f87973e6afaa872068124e4e08ac55f"
+    },
+    "data_sha256": {
+      "Pantheon+SH0ES.dat": "1cb0fc379ef066afdc2ffd1857681cc478024570d8a3eba284fb645775198cf8",
+      "Pantheon+SH0ES_STAT+SYS.cov": "abf806d966485e64afdb359c87bffc0ecc00d05eff0a31ced66f247385df0fdc"
+    },
+    "versions": {
+      "numpy": "2.0.1",
+      "scipy": "1.17.1",
+      "qiskit": "2.3.0",
+      "qiskit-aer": "0.17.2",
+      "requests": "2.32.5",
+      "pandas": "3.0.2",
+      "matplotlib": "3.10.8"
+    }
+  },
+  "four_stages_per_generation": true,
+  "configuration": [
+    {
+      "width": 3,
+      "groups": 9,
+      "used_qubits": 27,
+      "population": 72
+    },
+    {
+      "width": 4,
+      "groups": 7,
+      "used_qubits": 28,
+      "population": 112
+    },
+    {
+      "width": 5,
+      "groups": 5,
+      "used_qubits": 25,
+      "population": 160
+    },
+    {
+      "width": 6,
+      "groups": 4,
+      "used_qubits": 24,
+      "population": 256
+    },
+    {
+      "width": 7,
+      "groups": 4,
+      "used_qubits": 28,
+      "population": 512
+    },
+    {
+      "width": 8,
+      "groups": 3,
+      "used_qubits": 24,
+      "population": 768
+    }
+  ]
+}

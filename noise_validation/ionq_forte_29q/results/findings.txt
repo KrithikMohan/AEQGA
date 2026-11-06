@@ -1,0 +1,75 @@
+IONQ FORTE-1 NOISE WIDTH STUDY
+
+Execution: official IonQ Quantum Cloud backend=simulator, noise.model=forte-1.
+No quantum hardware was used. Official model internals are not downloaded or reproduced locally.
+100 evolutionary updates plus generation 0; 100 shots for EACH of four stages per generation.
+Four stages = H0/local, H0/global, Omega_m/local, Omega_m/global.
+Each submitted stage packs all subpopulations onto disjoint logical wires.
+The 29-qubit budget is truncated to floor(29/q)*q; no heterogeneous remainder group.
+Declared/allocated wires can differ from wires touched after compiler optimization.
+Native compiled gate lists and actual touched-wire counts are archived.
+All cloud outcomes are genuine returned finite-shot histograms, not locally generated noise.
+
+METHOD
+Same Pantheon+SH0ES selection and full covariance as the Marrakesh experiment (1657 observations).
+H0 bounds [60,80], Omega_m bounds [0.1,0.5], M bounds [-19.6,-19.0].
+M is profiled for EVERY candidate: clip((1^T C^-1 (m-mu))/(1^T C^-1 1), M bounds).
+Each group has 2^q candidates, with elite:local:global counts 1:1:2.
+Each generation selects global elites and deals them to groups round-robin by rank.
+Same crossover probability 0.5, mutation probability 0.5, local padding 0.5, minimum width 0.01.
+Seed 7; separate deterministic cloud noise seeds recorded for every stage.
+Preparation is synthesized into rx/ry/rz/cnot QIS gates at optimization level 1.
+If isometry synthesis changes probabilities by TVD > 2e-6, an exact real-amplitude rotation tree at optimization level 0 is used.
+This numerical fallback retains the original 2e-6 validation bound and is recorded per stage.
+IonQ then applies its official compiler to Forte native GPi/GPi2/ZZ gates.
+The previous repeated reset/measure sequence is split into independent initialized jobs.
+Sorted pairing across stage histograms is an internal adapter only; it is NOT measured cross-stage correlation.
+Only the stage marginal counts are used in candidate decoding.
+Ideal controls are locally sampled from exact QIS statevectors with 100 shots, not cloud ideal probabilities.
+No local substitute is used for official noise. Ideal/noisy runs start from identical populations.
+
+CLASSICAL REFERENCE
+{"p": [73.53278416089039, 0.33181205246809664, -19.24405749106509], "chi2": 1452.0159499801912, "success": true, "method": "GLS profile in M and -5log10(H0/70); golden-section Omega_m search"}
+
+RESULTS
+q | groups | used wires | candidates | final noisy delta chi2 | final ideal delta chi2 | first generation delta<=0.001
+3 | 9 | 27 | 72 | 2.795526143e-06 | 6.167384527e-06 | 10
+4 | 7 | 28 | 112 | 2.649885573e-07 | 3.614159141e-07 | 11
+5 | 5 | 25 | 160 | 0.002661993081 | 0.000412129104 | None
+6 | 4 | 24 | 256 | 0.003360214418 | 0.008881619583 | None
+7 | 4 | 28 | 512 | 0.006635451517 | 0.004496088511 | None
+8 | 3 | 24 | 768 | 0.002551472662 | 0.0003411390564 | None
+
+Among these single-seed noisy runs, the lowest final chi-square occurred at q=4: 1452.015950245180.
+
+INTERPRETATION LIMITS
+One seed per configuration; there are no confidence intervals or claims of an optimal width.
+Width changes candidates per group, number of groups, proposal distributions, circuit gates, and sampling sparsity.
+Observed-to-ideal TVD combines hardware-model noise, finite-shot variation, and official compiler approximation.
+Exact noisy probabilities are unavailable; this metric does not isolate noise from sampling.
+More candidate evaluations are classical likelihood evaluations; fewer generations do not establish quantum speedup.
+Checkpoint and summary wall times describe the latest runner pass; replaying cached generations does not wait again.
+cloud_timing_history.csv reconstructs elapsed calendar time from original cloud submissions and completions, including interruptions.
+Cloud calendar time includes scheduling, simulation and gaps; local runner time also includes preparation and objective calculation.
+It is not a measurement of QPU gate execution time or physical gate parallelism.
+Changing the budget from Marrakesh 156 to IonQ 29 changes total candidate counts; raw outcomes do not isolate vendor noise.
+The decoder replaces lower-bound/zero-bin outcomes with classical uniform draws, as in the original implementation.
+For wider circuits this can increase random exploration; a lower chi-square alone does not demonstrate improved quantum sampling.
+IonQ describes its noise model as approximate and not a guarantee of specific real-device performance.
+The current Forte model is a versioned cloud service and may change; request seeds alone do not freeze future results.
+Saved responses, task metadata, compiled artifacts and file hashes preserve the evidence from this run.
+
+VALIDATION
+Total candidate rows: 379760
+Total training cloud jobs: 2400 (plus one asymmetric preflight).
+All generations, elite transfers, 100-shot sums, packed-to-group marginals, and CSV/JSON parameter records checked.
+Every candidate likelihood and profiled M checked using 64-node quadrature; training used 32 nodes.
+Candidate parameters reproduced from seed 7, saved stage counts, and independently checked objective values.
+Scalar recalculations for rows exceeding the initial batch tolerance: 0.
+Exact state-preparation fallbacks: 139.
+
+SOURCES
+https://docs.ionq.com/features/simulation-with-noise-models
+https://docs.ionq.com/features/getting-started-with-native-gates
+https://docs.ionq.com/api-reference/v0.4/jobs/create-job
+https://docs.ionq.com/api-reference/v0.4/jobs/get-job-artifact

@@ -1,0 +1,4 @@
+* -text whitespace=cr-at-eol
+reproduction/Pantheon+_Data/**/*.cov -diff
+reproduction/Pantheon+_Data/** -whitespace
+results/*.svg -whitespace
