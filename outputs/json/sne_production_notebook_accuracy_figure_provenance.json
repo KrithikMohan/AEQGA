@@ -358,15 +358,15 @@
   "exports": [
     {
       "path": "/home/bobjoe/PycharmProjects/AEGQA/outputs/png/sne_production_notebook_accuracy.png",
-      "sha256": "73a0d6d356df6c1f7305175ba1513458b9bf9ba024095b0f7c71312688aa7ed5"
+      "sha256": "ee4d77f25b85694f0cf733e16b602632bdbb30a7fdcaaebe3fd8dfae030e6043"
     },
     {
       "path": "/home/bobjoe/PycharmProjects/AEGQA/outputs/svg/sne_production_notebook_accuracy.svg",
-      "sha256": "83832ec17d06228c6739c6a26e9365e1d415dc8daf65f32d57a92dfce2b9542c"
+      "sha256": "17d2179c61c2c5ff925fc97cb5679e60e62cad3a1949071655ee5958ad1014ac"
     },
     {
       "path": "/home/bobjoe/PycharmProjects/AEGQA/outputs/pdf/sne_production_notebook_accuracy.pdf",
-      "sha256": "dd1122bf96b7b7b1490945da1d83f33997a38ca02870bd17e0cc4a1ba0f081e6"
+      "sha256": "dd92311f8cb8470253fe32d3c9eeb6431b933edb1ca8697ad8b33af001aea279"
     }
   ]
 }

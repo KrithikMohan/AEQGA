@@ -358,15 +358,15 @@
   "exports": [
     {
       "path": "/home/bobjoe/PycharmProjects/AEGQA/outputs/png/notebook_sne_optimizer_density.png",
-      "sha256": "f8a4e4113d752e297101e60695900d7bb32d090e94290abcbc5d43447d176695"
+      "sha256": "ddca98c803a538c0c617c046c42b20a9788ca26a9905d465e70a8c79a30b6e1a"
     },
     {
       "path": "/home/bobjoe/PycharmProjects/AEGQA/outputs/svg/notebook_sne_optimizer_density.svg",
-      "sha256": "a46a2f3d7b81c2d14a7c81e6786d82e76c94a2ded8244f8a611548c2fa9ecf41"
+      "sha256": "f2d4be7219502b47f007e515ac900dc7e67ba79e351b7f677fb4802f004c1c8d"
     },
     {
       "path": "/home/bobjoe/PycharmProjects/AEGQA/outputs/pdf/notebook_sne_optimizer_density.pdf",
-      "sha256": "bd6361f4695dfc63870f5abd88962f2dc35032257d60fdd87395201bf6412acb"
+      "sha256": "2e71a95769d80fcd0610977a071ad5fbd7ff99e10a9195d1cec7046f066e9674"
     }
   ]
 }

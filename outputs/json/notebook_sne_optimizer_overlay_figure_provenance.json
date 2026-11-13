@@ -358,15 +358,15 @@
   "exports": [
     {
       "path": "/home/bobjoe/PycharmProjects/AEGQA/outputs/png/notebook_sne_optimizer_overlay.png",
-      "sha256": "5208e8f6c4286be10c118bdfeb7a8363631adf2409d4a547b9f697d9cd1b2b8c"
+      "sha256": "9df86a8e398969c39d7dd4ba900c8c9eac2ec38aec27fa8eca9e9f6ad6638ad7"
     },
     {
       "path": "/home/bobjoe/PycharmProjects/AEGQA/outputs/svg/notebook_sne_optimizer_overlay.svg",
-      "sha256": "0151cc5625fab9806f80e8a1d6b6c000bee95f40f909ca873030477e8dd7edbd"
+      "sha256": "e7b70e41c0b0d6653a226f688098ce9b808750d9b36dcb35265d7cd8a3e78e30"
     },
     {
       "path": "/home/bobjoe/PycharmProjects/AEGQA/outputs/pdf/notebook_sne_optimizer_overlay.pdf",
-      "sha256": "77a3ef70dcfb8dc51d026ee1ba0fe38026b1ed1f6b700b937301887401ae62cd"
+      "sha256": "cb902420d6d0054aba8d576204647f1b59d70085d05eee88aa6329af2993abee"
     }
   ]
 }
