@@ -377,3 +377,103 @@ Implemented in `aeqga/analysis/circuit_comparison.py`:
 * Workspace files: `amplitude_encoding.py`, `quantum_gates.py`, `aeqga_algorithm.py`, `pantheon_problem.py`, `aeqga/execution/ibm_sampler.py`, `aeqga/analysis/circuit_comparison.py`, `tests/test_ibm_adapter.py`, `docs/IBM_HARDWARE.md`.
 
 *Reconstruction and offline verification complete as of 2026-10-16. All tests pass.*
+
+## 9. Current results and replication status
+
+This update supersedes the Pantheon+, BAO/CMB, and 300-run campaign entries in
+Section 6. The maintained implementation lives in the `aeqga/` package.
+
+### Pantheon+ simulation results
+
+The completed ensemble used all 1,701 calibrated Pantheon+ MU_SH0ES rows and
+the full statistical and systematic covariance. It comprised 300 independent
+finite-shot statevector simulations with 32 individuals, 50 updates, 4,096 shots
+per circuit, and crossover and mutation probabilities of 0.5. The classical
+minimum under the same objective was χ² = 1752.904047. Of the 300 runs, **265
+(88.3%)** finished within Δχ² < 2.30 of that minimum. The median gap was 0.293,
+and the largest was 17.98. These statistics describe optimizer agreement with
+the classical fit under the configured likelihood.
+[Pantheon+ results and figure exports](SNE_PLOT_RESULTS.md) ·
+[Numeric accuracy report](../outputs/json/sne_production_notebook_accuracy.json)
+
+![Accuracy of 300 Pantheon+ simulation runs against the classical fit](../outputs/png/sne_production_notebook_accuracy.png)
+
+### BAO and CMB replication
+
+The maintained package implements separate BAO and CMB likelihoods and a
+combined BAO+CMB objective. The configured CAMB fit gives H₀ = 67.415 km/s/Mpc
+and Ωₘ = 0.3145. The paper reports H₀ = 66.76 km/s/Mpc and Ωₘ = 0.323. Exact
+replication remains open because the original PICO model and TT data conventions
+are unresolved. [BAO+CMB implementation and validation](TASKS_1_TO_7_REPORT.md#7-implement-separate-cmbbao-estimation)
+
+### Kingston hardware evidence
+
+The best candidate after the recorded hardware generation was already present
+in the initial population and survived through classical elitism. The
+single-circuit pilot exceeded all 10,000 ideal finite-shot trials in total
+variation distance, conditional on the reconstructed circuit. The original
+logical and compiled circuit archives are unavailable, which prevents
+independent verification of the circuit used for the comparison. The archived
+hardware results cover one single-circuit pilot and one complete generation.
+[Kingston results and provenance audit](PR10_SUMMARY.md)
+
+### Reproducing the current results
+
+Use the maintained `aeqga/` package, the pinned Pantheon+ data revision and run
+commands in the README, and the maintained notebook at `notebooks/AEQGA.ipynb`.
+Run the current verification suite with `python -m unittest discover -s tests -v`
+from the repository root after setup. The `test_pantheon_aeqga.py` script listed
+in Section 2 has been retired. [Setup and simulation](../README.md#setup-and-simulation) ·
+[Verification](../README.md#verification) · [Legacy test notes](../tests/LEGACY_TESTS.md)
+
+### Classical comparison still needed
+
+The classical fit provides a reference for measuring optimization error. To
+test whether the circuit operators improve search performance, compare AEQGA
+with uniform random search and a classical genetic algorithm under the same
+Pantheon+ objective, parameter bounds, and objective-evaluation budget. Use
+paired initial populations where applicable, run repeated trials, and compare
+the distribution of final Δχ² and the fraction of runs below Δχ² = 2.30.
+
+### Matched-budget classical comparison results
+
+The comparison reused the 300 archived AEQGA simulation runs and ran both
+classical baselines from each run's exact initial population. All methods used
+the calibrated 1,701-row Pantheon+ objective, full STAT+SYS covariance, the
+300-node nearest-neighbor Ωₘ distance grid, and bounds H₀ ∈ [60, 80] and
+Ωₘ ∈ [0, 0.5]. The budget was **1,632 objective evaluations per run**. For
+AEQGA and the classical GA, this counts 32 initial evaluations plus 50 updates
+of 32 evaluations, including rescoring retained elites. Before comparing
+outcomes, the data and scientific source hashes were checked against the
+archived configuration, and all 300 AEQGA final objective values were
+recomputed. [Archived AEQGA accuracy data and run seeds](../outputs/json/sne_production_notebook_accuracy.json)
+
+| Method | Median Δχ² | 90th percentile Δχ² | Worst Δχ² | Runs with Δχ² < 2.30 (95% Wilson interval) |
+|---|---:|---:|---:|---:|
+| AEQGA (finite-shot simulation) | 0.29270 | 2.41930 | 17.97772 | 265/300 (88.3%, 84.2–91.5%) |
+| Uniform random search | 0.67992 | 1.96717 | 5.75594 | 278/300 (92.7%, 89.1–95.1%) |
+| Classical genetic algorithm | 0.01114 | 0.10169 | 0.39300 | 300/300 (100%, 98.7–100%) |
+
+Δχ² is the best objective value found in the run minus the configured classical
+minimum of 1752.904047. AEQGA returned a lower gap than random search in
+191 of 300 paired runs. Random search had a lower 90th-percentile gap and
+met the success threshold in 13 more runs. The classical GA returned a lower
+gap than AEQGA in 252 of 300 pairs and met the threshold in every run. On this
+objective and budget, the tested classical GA outperformed AEQGA on both
+typical fit quality and reliability. The comparison measures search quality
+per objective evaluation. Runtime and quantum execution costs were outside
+its scope.
+
+Uniform random search evaluated the shared 32 starting points and 1,600
+additional independent uniform draws, retaining the best point. Each classical
+GA update kept the eight best candidates using stable fitness order, generated
+eight children, and drew 16 uniform immigrants. Each child drew two parents
+uniformly with replacement from the elites. With probability 0.5, it took a
+weighted average with an independent uniform [0, 1) weight per coordinate.
+Otherwise it copied the first parent. Each coordinate independently had a
+0.5 chance of Gaussian mutation with a standard deviation of 5% of its search
+range. Children were clipped to the bounds. The baselines used NumPy 2.5.3
+with RNGs initialized by `default_rng([seed, 1])` for random search and
+`default_rng([seed, 2])` for the GA, using the archived seed for each pair.
+The GA settings reflect one baseline design and the comparison covers one
+configured Pantheon+ objective.
