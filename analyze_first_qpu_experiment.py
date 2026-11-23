@@ -105,9 +105,13 @@ print("Mean ideal-shot TVD:", simulated_tvd.mean())
 print("95th percentile:", np.percentile(simulated_tvd, 95))
 print("99th percentile:", np.percentile(simulated_tvd, 99))
 
+exceedances = int(np.count_nonzero(simulated_tvd >= tvd))
+exceedance_summary = f"{exceedances:,} of {N_TRIALS:,} simulated trials reached the observed TVD"
+print(exceedance_summary)
 print(
-    "Fraction of ideal-shot experiments with TVD >= hardware:",
-    np.mean(simulated_tvd >= tvd),
+    "This count is conditional on the reconstructed ideal circuit. "
+    "Zero observed exceedances does not establish zero tail probability. "
+    "The comparison cannot isolate hardware noise without verified circuit identity."
 )
 
 plt.figure(figsize=(9, 5))
@@ -130,7 +134,7 @@ plt.axvline(
 
 plt.xlabel("Total variation distance")
 plt.ylabel("Probability density")
-plt.title("Kingston vs reconstructed ideal: finite-shot comparison")
+plt.title(f"Kingston vs reconstructed ideal: finite-shot comparison\n{exceedance_summary}")
 plt.legend()
 plt.tight_layout()
 
@@ -140,4 +144,3 @@ plt.savefig(
 )
 
 plt.show()
-

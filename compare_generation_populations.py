@@ -67,19 +67,32 @@ best_sim, populations_sim, history_sim = run_aeqga_dual(
     quiet=True,
 )
 
-initial_difference = np.max(
-    np.abs(populations_hw[0] - populations_sim[0])
-)
+def describe_population(initial, final):
+    """Report marginal quantiles in native units and score complete pairs.
 
-final_difference = np.max(
-    np.abs(populations_hw[1] - populations_sim[1])
-)
+    Row-wise differences mix arbitrary pairings and decoding draws.
+    Best chi-square improvement is measured against the initial best
+    because the optimizer can preserve that candidate through elitism.
+    Circuit identity is unverified, so this replay cannot isolate noise.
+    """
+    initial_best = min(map(problem.compute_fitness, initial))
+    scores = np.array(list(map(problem.compute_fitness, final)))
+    return {
+        "H0_quantiles_10_50_90": np.quantile(final[:, 0], [.1, .5, .9]).tolist(),
+        "Omega_m_quantiles_10_50_90": np.quantile(final[:, 1], [.1, .5, .9]).tolist(),
+        "initial_best_chi2": float(initial_best),
+        "final_best_chi2": float(scores.min()),
+        "final_median_chi2": float(np.median(scores)),
+        "best_chi2_improvement": float(initial_best - scores.min()),
+    }
 
-print("\n=== EXPLORATORY REPLAY: ORIGINAL CIRCUIT IDENTITY UNVERIFIED ===")
-print("Initial population max difference:", initial_difference)
-print("Generation 1 population max difference:", final_difference)
-print("Hardware best:", best_hw.x, best_hw.fitness)
-print("Simulator best:", best_sim.x, best_sim.fitness)
+
+print("Exploratory replay with unverified circuit identity.")
+print(json.dumps({
+    "initial_populations_match": bool(np.array_equal(populations_hw[0], populations_sim[0])),
+    "hardware_replay": describe_population(*populations_hw[:2]),
+    "ideal_simulator": describe_population(*populations_sim[:2]),
+}, indent=2))
 
 np.savez(
     "outputs/json/ibm_generation_01/population_comparison_reconstructed.npz",
@@ -91,4 +104,3 @@ np.savez(
 )
 
 print("Population comparison saved.")
-
