@@ -14,7 +14,7 @@ from aeqga.steps.evolution.aeqga_algorithm import (
 SEED = 42
 SHOTS = 1024
 
-# Reconstruct the exact ideal input circuit
+# Reconstruct the ideal input circuit from historical settings; identity is unverified.
 random.seed(SEED)
 rng = np.random.default_rng(SEED)
 values = rng.uniform(0.1, 1.0, 16)
@@ -54,7 +54,7 @@ tvd = 0.5 * np.sum(np.abs(measured - ideal))
 print("\n=== AEQGA HARDWARE ANALYSIS ===")
 print("Processor: IBM Kingston")
 print("Shots:", SHOTS)
-print("Total variation distance:", tvd)
+print("TVD vs reconstructed ideal reference:", tvd)
 print("Maximum probability error:",
       np.max(np.abs(measured - ideal)))
 
@@ -70,12 +70,12 @@ plt.bar(x + width/2, measured, width, label="IBM Kingston")
 plt.xticks(x, labels, rotation=45)
 plt.xlabel("Computational basis state")
 plt.ylabel("Measurement probability")
-plt.title(f"AEQGA: Ideal vs IBM Kingston (TVD = {tvd:.4f})")
+plt.title(f"AEQGA: Reconstructed ideal vs IBM Kingston (TVD = {tvd:.4f})")
 plt.legend()
 plt.grid(axis="y", alpha=0.3)
 plt.tight_layout()
 
-output = Path("outputs/png/ibm_first_comparison.png")
+output = Path("outputs/png/ibm_first_comparison_reconstructed.png")
 output.parent.mkdir(parents=True, exist_ok=True)
 plt.savefig(output, dpi=200)
 
@@ -130,13 +130,14 @@ plt.axvline(
 
 plt.xlabel("Total variation distance")
 plt.ylabel("Probability density")
-plt.title("AEQGA: Shot noise vs observed QPU discrepancy")
+plt.title("Kingston vs reconstructed ideal: finite-shot comparison")
 plt.legend()
 plt.tight_layout()
 
 plt.savefig(
-    "outputs/png/ibm_shot_noise_comparison.png",
+    "outputs/png/ibm_shot_noise_comparison_reconstructed.png",
     dpi=200,
 )
 
 plt.show()
+
