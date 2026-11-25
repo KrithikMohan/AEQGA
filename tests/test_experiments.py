@@ -18,6 +18,26 @@ class Bowl:
 
 
 class ExperimentTests(unittest.TestCase):
+    def test_aer_noise_model_is_used_and_recorded_in_checkpoint(self):
+        from qiskit_aer.noise import NoiseModel, ReadoutError
+
+        model = NoiseModel()
+        model.add_all_qubit_readout_error(ReadoutError([[0.92, 0.08], [0.15, 0.85]]))
+        noise = model.to_dict(serializable=True)
+        params = algorithm.AEQGAParameters(pop_size=8, max_gen=1, num_shots=128,
+                                           progress_bar=False)
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "noisy.json"
+            with patch("aeqga.experiments.runner.run_aeqga_dual",
+                       wraps=algorithm.run_aeqga_dual) as optimizer:
+                result = run_ensemble(Bowl(), params, [11], path, provenance={},
+                                      execution_mode="aer", aer_noise_model=noise)
+                simulator = optimizer.call_args.kwargs["simulator"]
+                self.assertEqual(simulator.options.noise_model, model)
+            self.assertEqual(result["configuration"]["aer_noise_model"], noise)
+            with self.assertRaisesRegex(ValueError, "aer_noise_model"):
+                run_ensemble(Bowl(), params, [11], path, provenance={}, execution_mode="aer")
+
     def test_namespace_isolates_changes_and_resumes_without_overwrite(self):
         params = algorithm.AEQGAParameters(pop_size=8,max_gen=1,num_shots=128,progress_bar=False)
         with tempfile.TemporaryDirectory() as directory:

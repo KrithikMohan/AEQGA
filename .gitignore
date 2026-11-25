@@ -34,6 +34,7 @@ outputs/svg/*
 outputs/pdf/*
 !outputs/svg/.gitkeep
 !outputs/pdf/.gitkeep
+!outputs/pdf/PR10_SUMMARY.pdf
 !outputs/png/.gitkeep
 !outputs/json/.gitkeep
 !outputs/png/ionq_reference_demo_100shot.png

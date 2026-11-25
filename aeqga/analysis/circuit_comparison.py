@@ -21,22 +21,10 @@ from scipy import stats
 from qiskit import QuantumCircuit
 from qiskit.quantum_info import Statevector
 
-try:
-    from aeqga.steps.encoding.amplitude_encoding import n_qubits_for_population
-    from aeqga.steps.decoding.measurement_decoding import decode_random_subset, decode_elite_subset
-    from aeqga.steps.evolution.aeqga_algorithm import build_dimension_circuit, AEQGAParameters
-    from aeqga.steps.selection.population import split_population
-except ImportError:
-    from amplitude_encoding import (  # type: ignore
-        decode_random_subset,
-        decode_elite_subset,
-        n_qubits_for_population,
-    )
-    from aeqga_algorithm import (  # type: ignore
-        build_dimension_circuit,
-        split_population,
-        AEQGAParameters,
-    )
+from aeqga.steps.encoding.amplitude_encoding import n_qubits_for_population
+from aeqga.steps.decoding.measurement_decoding import decode_random_subset, decode_elite_subset
+from aeqga.steps.evolution.aeqga_algorithm import build_dimension_circuit, AEQGAParameters
+from aeqga.steps.selection.population import split_population
 from aeqga.execution.ibm_sampler import compute_circuit_fingerprint
 
 

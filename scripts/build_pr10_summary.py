@@ -23,7 +23,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def build():
     report = json.loads((ROOT / "docs/PR10_COMPATIBILITY.json").read_text())
     pilot, generation = report["pilot"], report["generation"]
-    output = ROOT / "output/pdf/PR10_SUMMARY.pdf"
+    output = ROOT / "outputs/pdf/PR10_SUMMARY.pdf"
     output.parent.mkdir(parents=True, exist_ok=True)
     navy, teal, muted = colors.HexColor("#14324B"), colors.HexColor("#007F82"), colors.HexColor("#506575")
     styles = getSampleStyleSheet()

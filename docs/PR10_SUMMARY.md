@@ -1,6 +1,6 @@
 # PR #10: Kingston results and compatibility
 
-[PDF report](../output/pdf/PR10_SUMMARY.pdf) |
+[PDF report](../outputs/pdf/PR10_SUMMARY.pdf) |
 [Numeric audit](PR10_COMPATIBILITY.json) |
 [Original PR #10](https://github.com/KrithikMohan/AEQGA/pull/10)
 
@@ -65,9 +65,8 @@ local credentials and consumes the account allocation.
 
 ```bash
 python -m aeqga.analysis.pr10_compatibility --output docs/PR10_COMPATIBILITY.json
-python compare_generation_populations.py
-python analyze_first_qpu_experiment.py
-python recover_ibm_job.py --checkpoint outputs/json/ibm_first_pilot/generation_0001.json
+python -m scripts.analyze_first_qpu_experiment
+python -m scripts.recover_ibm_job --checkpoint outputs/json/ibm_first_pilot/generation_0001.json
 MPLBACKEND=Agg OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m unittest discover -s tests -q
 ```
 
