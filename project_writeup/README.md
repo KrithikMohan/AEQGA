@@ -16,6 +16,7 @@ The project is an experiment in **optimization**, the search for the best answer
 | [2. The search and the quantum circuit](02-search-and-circuit.md) | What happens during one generation, from the first guesses to the new population? |
 | [3. From a simulator to real hardware](03-experiments-and-results.md) | What did we run, what did we find, and what do the plots actually mean? |
 | [4. Reproduce it and read the code](04-reproduce-and-explore.md) | How do I run a small example safely, find its output, and check my understanding? |
+| [Poster results](poster-results.md) | How do the Kingston measurements, physics fit, noise model and qubit packing fit together? |
 | [Glossary](glossary.md) | What does that symbol or technical term mean again? |
 | [Repository snapshot and sources](sources-and-update.md) | What changed upstream, and where can I verify the numbers? |
 

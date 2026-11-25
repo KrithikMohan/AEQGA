@@ -24,25 +24,15 @@ an elite-copy quarter and a fresh random half pass through separate circuits.
 - Independent-run ensembles, provenance checks, scientific figures and
   generation-level hardware recovery.
 
-**Use the `aeqga/` package.** Root-level `aeqga_algorithm.py`,
-`pantheon_problem.py` are historical copies. In particular,
-the root likelihood contains a synthetic fallback and is unsuitable for
-scientific hardware runs. The maintained notebook is `notebooks/AEQGA.ipynb`;
-the obsolete root-level notebook has been removed.
+Use the maintained [optimizer](aeqga/steps/evolution/aeqga_algorithm.py) and
+[Pantheon+ likelihood](aeqga/likelihoods/pantheon_problem.py) in the `aeqga/`
+package. The original root copies are in [old versons](old%20versons/).
 
 ## Layout
 
-| Location | Responsibility |
-|---|---|
-| `aeqga/steps/` | Selection, encoding, genetic gates, decoding and evolution |
-| `aeqga/likelihoods/` | Pantheon+, cosmological distances, BAO and CMB |
-| `aeqga/execution/ibm_sampler.py` | Ideal/noisy Aer and IBM execution, counts, archives, diagnostics |
-| `aeqga/execution/workflow.py` | Scientific identity and full optimizer restart |
-| `aeqga/experiments/runner.py` | Resumable independent simulation ensembles |
-| `aeqga/analysis/` | Circuit distribution comparisons and offline mitigation study |
-| `aeqga/visualization/` | Convergence, objective contours and optimizer distributions |
-| `scripts/` | Simulation, hardware pilots, recovery and analysis commands |
-| `tests/` | Offline numerical, recovery and integration tests |
+- [Repository map](docs/REPOSITORY_MAP.md) groups the code by task and shows where results and archived files live.
+- [Main notebook](notebooks/AEQGA.ipynb) is the interactive starting point. [aeqga/](aeqga) holds the maintained implementation, and [scripts/](scripts) holds command-line launchers and utilities.
+- [Kingston poster results](project_writeup/poster-results.md) links the comparison figure and the package code that runs the noise simulation and renders the four panels.
 
 ## Setup and simulation
 
@@ -141,10 +131,9 @@ what is checked, the distance-grid limitations, and what the graphs cannot prove
 
 ## Supplied noisy/QPU examples
 
-The demo uploaded to GitHub `main` is copied here as
-`qml_demo_noisy_and_qpu.zip` and unpacked in `qml_demo_noisy_and_qpu/`.
-The ZIP preserves the original files. The extracted
-[`test_ionq_sim.ipynb`](qml_demo_noisy_and_qpu/test_ionq_sim.ipynb) now defaults
+The working demo files are in [examples](examples/qml_demo_noisy_and_qpu/).
+The [original ZIP](old%20versons/original-demos/qml_demo_noisy_and_qpu.zip)
+is archived. The working [IonQ notebook](examples/qml_demo_noisy_and_qpu/test_ionq_sim.ipynb) now defaults
 to 100 shots and includes executed counts, a plot, and an interpretation.
 With no IonQ provider package or API credential in this environment, its
 recorded result uses local Aer with IBM FakeBrisbane noise; it is **not** an

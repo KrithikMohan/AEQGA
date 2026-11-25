@@ -1,5 +1,7 @@
 """Tasks 8–12: resumable real-data ensemble and shared scientific figures."""
 import argparse
+import json
+from pathlib import Path
 import numpy as np
 import matplotlib.pyplot as plt
 from aeqga.experiments.runner import run_ensemble, atomic_json, file_digest
@@ -31,9 +33,21 @@ def main():
     parser.add_argument("--seed",type=int,default=23)
     parser.add_argument("--grid",type=int,choices=[0,100,300],default=300)
     parser.add_argument("--engine",choices=["aer","statevector_shots"],default="statevector_shots")
+    parser.add_argument("--noise-model", type=Path,
+                        help="JSON from Aer NoiseModel.to_dict() (requires --engine aer)")
     parser.add_argument("--name",default="sne_production")
     args = parser.parse_args()
     if args.runs < 1: parser.error("runs must be positive")
+    noise_model = None
+    if args.noise_model is not None:
+        if args.engine != "aer" or args.shots <= 0:
+            parser.error("--noise-model requires --engine aer and positive --shots")
+        try:
+            noise_model = json.loads(args.noise_model.read_text())
+        except (OSError, ValueError) as exc:
+            parser.error(f"Cannot read --noise-model: {exc}")
+        if not isinstance(noise_model, dict) or not noise_model.get("errors"):
+            parser.error("--noise-model must contain a Qiskit Aer noise-model dictionary with errors")
     if not args.name or any(c not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-" for c in args.name):
         parser.error("name must contain only letters, digits, underscore or hyphen")
     problem = PantheonPlusProblem(grid_size=args.grid)
@@ -41,6 +55,7 @@ def main():
     seeds = [int(s.generate_state(1)[0]) for s in np.random.SeedSequence(args.seed).spawn(args.runs)]
     result = run_ensemble(problem,params,seeds,output_path("json",args.name+"_checkpoint.json"),
                           provenance=sne_provenance(problem),execution_mode=args.engine,
+                          aer_noise_model=noise_model,
                           progress=lambda n,total: print(f"Completed {n}/{total}",flush=True) if n%10==0 or n==total else None)
     reference = problem.classical_minimum()
     points = np.array([r["best_x"] for r in result["runs"]])

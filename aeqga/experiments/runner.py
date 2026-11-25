@@ -138,15 +138,28 @@ def validate_history(problem, params, record):
 
 def run_ensemble(problem, params, seeds, checkpoint, *, provenance,
                  execution_mode="statevector_shots", resume=True, progress=None,
-                 checkpoint_policy="strict"):
+                 checkpoint_policy="strict", aer_noise_model=None):
     """Return ALL samples/histories; never reuse mismatched or corrupt checkpoints.
 
     Each completed run is atomically saved before the manifest is advanced.
     A crash at that boundary reruns only the uncommitted run. Single-writer API.
     With checkpoint_policy='namespace', changed configurations use a different
     fingerprint-named checkpoint, preserving old runs. Strict remains default.
+    aer_noise_model accepts a JSON-compatible Qiskit Aer NoiseModel dictionary.
+    Its contents are included in the checkpoint identity.
     """
     params._validate()
+    simulator_options = {}
+    if aer_noise_model is not None:
+        if execution_mode != "aer" or params.num_shots <= 0:
+            raise ValueError("An Aer noise model requires execution_mode='aer' and positive shots")
+        if not isinstance(aer_noise_model, dict) or not aer_noise_model.get("errors"):
+            raise ValueError("Expected a Qiskit Aer noise-model dictionary with errors")
+        from qiskit_aer import AerSimulator
+        from qiskit_aer.noise import NoiseModel
+
+        simulator_options["simulator"] = AerSimulator(
+            noise_model=NoiseModel.from_dict(aer_noise_model))
     seeds = list(seeds)
     if (not seeds or any(isinstance(s, bool) or not isinstance(s, (int, np.integer))
                          or s < 0 or s >= 2**32 for s in seeds)
@@ -159,6 +172,8 @@ def run_ensemble(problem, params, seeds, checkpoint, *, provenance,
                          source_sha256=scientific_source_digest(),
                          versions={name: version(name) for name in
                                    ["numpy", "scipy", "qiskit", "qiskit-aer"]})
+    if aer_noise_model is not None:
+        configuration["aer_noise_model"] = aer_noise_model
     # Snapshot nested input dictionaries rather than retaining mutable aliases.
     configuration = json.loads(json.dumps(configuration, sort_keys=True))
     fingerprint = _fingerprint(configuration)
@@ -182,7 +197,8 @@ def run_ensemble(problem, params, seeds, checkpoint, *, provenance,
         else:
             started = perf_counter()
             best, populations, history = run_aeqga_dual(
-                problem, params, seed=seed, execution_mode=execution_mode, quiet=True)
+                problem, params, seed=seed, execution_mode=execution_mode,
+                quiet=True, **simulator_options)
             record = dict(seed=seed, fingerprint=fingerprint, best_x=best.x.tolist(),
                           best_chi2=best.fitness, best_generation=best.gen,
                           evaluations=best.evaluations, elapsed_seconds=perf_counter()-started,
